@@ -1,11 +1,8 @@
 package com.zup.estrelas.sistemaPrefeitura.controller;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.zup.estrelas.sistemaPrefeitura.dto.MensagemDto;
 import com.zup.estrelas.sistemaPrefeitura.dto.ProjetoDto;
-import com.zup.estrelas.sistemaPrefeitura.entity.SecretariaEntity;
+import com.zup.estrelas.sistemaPrefeitura.entity.ProjetoEntity;
 import com.zup.estrelas.sistemaPrefeitura.service.ProjetoService;
 
 
@@ -33,23 +30,18 @@ import com.zup.estrelas.sistemaPrefeitura.service.ProjetoService;
 		}
 
 		@GetMapping(path = "/{idProjeto}", produces = { MediaType.APPLICATION_JSON_VALUE })
-		public Optional<SecretariaEntity> buscaProjeto(@PathVariable Long idProjeto) {
-			return secretariaService.buscaProjeto(idProjeto);
+		public ProjetoEntity buscaProjeto(@PathVariable Long idProjeto) {
+			return projetoService.buscaProjeto(idProjeto);
 		}
 
 		@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-		public List<SecretariaEntity> listaProjetos() {
-			return (List<SecretariaEntity>) projetoService.listaProjetos();
-		}
-
-		@DeleteMapping(path = "/{idProjeto}", produces = { MediaType.APPLICATION_JSON_VALUE })
-		public MensagemDto removeSecretaria(@PathVariable Long idProjeto) {
-			return this.secretariaService.removeProjeto(idProjeto);
+		public List<ProjetoEntity> listaProjetos() {
+			return (List<ProjetoEntity>) projetoService.listaProjetos();
 		}
 
 		@PutMapping(path = "/{idProjeto}", produces = { MediaType.APPLICATION_JSON_VALUE })
-		public MensagemDto alteraSecretaria(@PathVariable Long idProjeto, @RequestBody SecretariaEntity secretaria) {
-			return this.secretariaService.alteraSecretaria(idProjeto, secretaria);
+		public MensagemDto alteraProjeto(@PathVariable Long idProjeto, @RequestBody ProjetoDto projetoDto) {
+			return this.projetoService.alteraProjeto(idProjeto, projetoDto);
 		}
 
 	}
