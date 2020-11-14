@@ -9,6 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "projeto")
@@ -24,9 +27,29 @@ public class ProjetoEntity {
 	private LocalDate dataInicio;
 	private LocalDate dataEntrega;
 	private Boolean concluido;
-	
+
+	@Transient
+	private Long idSecretraria;
+
+	public ProjetoEntity(String nome, String descricao, Double custo, LocalDate dataInicio, LocalDate dataEntrega,
+			Boolean concluido, SecretariaEntity idSecretaria) {
+		super();
+		this.nome = nome;
+		this.descricao = descricao;
+		this.custo = custo;
+		this.dataInicio = dataInicio;
+		this.dataEntrega = dataEntrega;
+		this.concluido = concluido;
+		this.idSecretaria = idSecretaria;
+	}
+
+	public ProjetoEntity() {
+
+	}
+
+	@JsonBackReference
 	@ManyToOne
-    @JoinColumn(name="idSecretaria", nullable=false)
+	@JoinColumn(name = "idSecretaria", nullable = false)
 	private SecretariaEntity idSecretaria;
 
 	public Long getIdProjeto() {

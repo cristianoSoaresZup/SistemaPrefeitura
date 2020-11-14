@@ -14,6 +14,6 @@ public interface SecretariaRepository extends CrudRepository<SecretariaEntity, L
 	Optional<SecretariaEntity> findByArea(String area);
 
 	Boolean existsByArea(String area);
-	
 
+	
 }

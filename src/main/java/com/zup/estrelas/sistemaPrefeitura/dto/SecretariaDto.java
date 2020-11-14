@@ -21,19 +21,19 @@ public class SecretariaDto {
 	public SecretariaEntity transformaPraObjeto() {
 		return new SecretariaEntity(area, orcamentoProjetos, orcamentoFolha, telefone, endereco, site, email, funcionarios, projetos);
 	}
-//
-//	public SecretariaDto(String area, Double orcamentoProjetos, Double orcamentoFolha,
-//			String telefone, String endereco, String site, String email) {
-//		super();
-//		this.area = area;
-//		this.orcamentoProjetos = orcamentoProjetos;
-//		this.orcamentoFolha = orcamentoFolha;
-//		this.telefone = telefone;
-//		this.endereco = endereco;
-//		this.site = site;
-//		this.email = email;
-//	}
-//
+
+	public SecretariaDto(String area, Double orcamentoProjetos, Double orcamentoFolha,
+			String telefone, String endereco, String site, String email) {
+		super();
+		this.area = area;
+		this.orcamentoProjetos = orcamentoProjetos;
+		this.orcamentoFolha = orcamentoFolha;
+		this.telefone = telefone;
+		this.endereco = endereco;
+		this.site = site;
+		this.email = email;
+	}
+
 	public String getArea() {
 		return area;
 	}

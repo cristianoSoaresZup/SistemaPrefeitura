@@ -1,24 +1,11 @@
-package com.zup.estrelas.sistemaPrefeitura.entity;
+package com.zup.estrelas.sistemaPrefeitura.dto;
 
 import java.time.LocalDate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import com.zup.estrelas.sistemaPrefeitura.entity.FuncionarioEntity;
+import com.zup.estrelas.sistemaPrefeitura.entity.SecretariaEntity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
-@Entity
-@Table(name = "funcionario")
-public class FuncionarioEntity {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class FuncionarioDto {
 	private Long idFuncionario;
 	private String nome;
 	private String cpf;
@@ -26,18 +13,11 @@ public class FuncionarioEntity {
 	private String funcao;
 	private Boolean concursado;
 	private LocalDate dataAdmissao;
-
-	@Transient
 	private Long idSecretaria;
-
-	@JsonBackReference
-	@ManyToOne
-	@JoinColumn(name = "idSecretaria", nullable = false)
 	private SecretariaEntity secretaria;
 
-	public FuncionarioEntity(String nome, String cpf, Double salario, String funcao, Boolean concursado,
+	public FuncionarioDto(String nome, String cpf, Double salario, String funcao, Boolean concursado,
 			LocalDate dataAdmissao, Long idSecretaria) {
-		super();
 		this.nome = nome;
 		this.cpf = cpf;
 		this.salario = salario;
@@ -47,16 +27,10 @@ public class FuncionarioEntity {
 		this.idSecretaria = idSecretaria;
 	}
 
-	public FuncionarioEntity() {
+	public FuncionarioEntity transformaParaObjeto() {
 
-	}
+		return new FuncionarioEntity(nome, cpf, salario, funcao, concursado, dataAdmissao, idSecretaria);
 
-	public Long getIdSecretraria() {
-		return idSecretaria;
-	}
-
-	public void setIdSecretraria(Long idSecretraria) {
-		this.idSecretaria = idSecretraria;
 	}
 
 	public Long getIdFuncionario() {
@@ -113,6 +87,14 @@ public class FuncionarioEntity {
 
 	public void setDataAdmissao(LocalDate dataAdmissao) {
 		this.dataAdmissao = dataAdmissao;
+	}
+
+	public Long getIdSecretaria() {
+		return idSecretaria;
+	}
+
+	public void setIdSecretaria(Long idSecretaria) {
+		this.idSecretaria = idSecretaria;
 	}
 
 	public SecretariaEntity getSecretaria() {

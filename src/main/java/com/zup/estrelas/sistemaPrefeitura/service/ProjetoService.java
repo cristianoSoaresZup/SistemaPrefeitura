@@ -14,7 +14,7 @@ import com.zup.estrelas.sistemaPrefeitura.repository.FuncionarioRepository;
 import com.zup.estrelas.sistemaPrefeitura.repository.SecretariaRepository;
 
 @Service
-public class FuncionarioService {
+public class ProjetoService {
 
 	public static final String FUNCIONARIO_CADASTRADO_COM_SUCESSO = "Funcionario cadastrado com sucesso";
 	public static final String FUNCIONARIO_ALTERADO_COM_SUCESSO = "Funcionario alterado com sucesso";
@@ -79,5 +79,3 @@ public class FuncionarioService {
 
 		return new MensagemDto(FUNCIONARIO_ALTERADO_COM_SUCESSO);
 	}
-
-}

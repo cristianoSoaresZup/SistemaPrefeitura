@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.zup.estrelas.sistemaPrefeitura.dto.FuncionarioDto;
 import com.zup.estrelas.sistemaPrefeitura.dto.MensagemDto;
 import com.zup.estrelas.sistemaPrefeitura.entity.FuncionarioEntity;
 import com.zup.estrelas.sistemaPrefeitura.service.FuncionarioService;
@@ -24,11 +25,11 @@ public class FuncionarioController {
 	FuncionarioService funcionarioService;
 
 	@PostMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-	public MensagemDto insereFuncionario(@RequestBody FuncionarioEntity funcionario) {
+	public MensagemDto insereFuncionario(@RequestBody FuncionarioDto funcionario) {
 		return this.funcionarioService.insereFuncionario(funcionario);
 	}
 
-	@GetMapping(path = "/{idSecretaria}", produces = { MediaType.APPLICATION_JSON_VALUE })
+	@GetMapping(path = "/{idFuncionario}", produces = { MediaType.APPLICATION_JSON_VALUE })
 	public FuncionarioEntity buscaFuncionario(@PathVariable Long idFuncionario) {
 		return funcionarioService.buscaFuncionario(idFuncionario);
 	}
@@ -38,21 +39,15 @@ public class FuncionarioController {
 		return (List<FuncionarioEntity>) funcionarioService.listaFuncionarios();
 	}
 
-	@DeleteMapping(path = "/{idSecretaria}", produces = { MediaType.APPLICATION_JSON_VALUE })
+	@DeleteMapping(path = "/{idFuncionario}", produces = { MediaType.APPLICATION_JSON_VALUE })
 	public boolean removeSecretaria(@PathVariable Long idFuncionario) {
 		return this.funcionarioService.removeFuncionario(idFuncionario);
 	}
 
-	@PutMapping(path = "/{idSecretaria}", produces = { MediaType.APPLICATION_JSON_VALUE })
-	public FuncionarioEntity alteraSecretaria(@PathVariable Long idFuncionario,
-			@RequestBody FuncionarioEntity funcionario) {
-		return this.funcionarioService.alteraFuncionario(funcionario);
-	}
+	@PutMapping(path = "/{idFuncionario}", produces = { MediaType.APPLICATION_JSON_VALUE })
+	public MensagemDto alteraFuncionario(@PathVariable Long idFuncionario, @RequestBody FuncionarioDto funcionario) {
 
-//		@PutMapping(path = "/{idSecretaria}", produces = { MediaType.APPLICATION_JSON_VALUE })
-//		public MensagemDTO alteraSecretaria(@PathVariable Long idSecretaria, @RequestBody AlteraSecretariaDTO secretaria) {
-	//
-//			return secretariaService.alteraSecretaria(idSecretaria, secretaria);
-//		}
+		return funcionarioService.alteraFuncionario(funcionario);
+	}
 
 }
