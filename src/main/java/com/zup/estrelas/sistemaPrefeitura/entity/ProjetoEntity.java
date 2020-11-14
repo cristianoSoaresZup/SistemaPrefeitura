@@ -20,7 +20,6 @@ public class ProjetoEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idProjeto;
-
 	private String nome;
 	private String descricao;
 	private Double custo;
@@ -29,10 +28,17 @@ public class ProjetoEntity {
 	private Boolean concluido;
 
 	@Transient
-	private Long idSecretraria;
+	private Long idSecretaria;
 
-	public ProjetoEntity(String nome, String descricao, Double custo, LocalDate dataInicio, LocalDate dataEntrega,
-			Boolean concluido, SecretariaEntity idSecretaria) {
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name = "idSecretaria", nullable = false)
+	private SecretariaEntity idSecretariaE;
+	
+	
+	
+	public ProjetoEntity(String nome, String descricao, Double custo, LocalDate dataInicio,
+			LocalDate dataEntrega, Boolean concluido, Long idSecretraria) {
 		super();
 		this.nome = nome;
 		this.descricao = descricao;
@@ -40,17 +46,15 @@ public class ProjetoEntity {
 		this.dataInicio = dataInicio;
 		this.dataEntrega = dataEntrega;
 		this.concluido = concluido;
-		this.idSecretaria = idSecretaria;
+		this.idSecretaria = idSecretraria;
+		
 	}
+
 
 	public ProjetoEntity() {
 
 	}
 
-	@JsonBackReference
-	@ManyToOne
-	@JoinColumn(name = "idSecretaria", nullable = false)
-	private SecretariaEntity idSecretaria;
 
 	public Long getIdProjeto() {
 		return idProjeto;
@@ -109,10 +113,10 @@ public class ProjetoEntity {
 	}
 
 	public SecretariaEntity getIdSecretaria() {
-		return idSecretaria;
+		return idSecretariaE;
 	}
 
 	public void setIdSecretaria(SecretariaEntity idSecretaria) {
-		this.idSecretaria = idSecretaria;
+		this.idSecretariaE = idSecretaria;
 	}
 }

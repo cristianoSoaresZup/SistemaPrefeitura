@@ -2,9 +2,11 @@ package com.zup.estrelas.sistemaPrefeitura.dto;
 
 import java.time.LocalDate;
 
+import com.zup.estrelas.sistemaPrefeitura.entity.ProjetoEntity;
+
 public class ProjetoDto {
 	
-	
+	private Long idSecretaria;
 	private String nome;
 	private String descricao;
 	private Double custo;
@@ -12,12 +14,29 @@ public class ProjetoDto {
 	private LocalDate dataEntrega;
 	private Boolean concluido;
 	
-	public ProjetoDto(String nome, String descricao, Double custo) {
-		super();
+	public ProjetoDto(Long idSecretaria, String nome, String descricao, Double custo) {
+	
+		this.idSecretaria = idSecretaria;
 		this.nome = nome;
 		this.descricao = descricao;
 		this.custo = custo;
 	}
+	
+	public ProjetoEntity transformaParaObjeto() {
+		return new ProjetoEntity(nome, descricao, custo, dataInicio, dataEntrega, concluido, idSecretaria);
+	}
+
+	public Long getIdSecretaria() {
+		return idSecretaria;
+	}
+
+
+
+	public void setIdSecretaria(Long idSecretaria) {
+		this.idSecretaria = idSecretaria;
+	}
+
+
 
 	public String getNome() {
 		return nome;
@@ -66,9 +85,6 @@ public class ProjetoDto {
 	public void setConcluido(Boolean concluido) {
 		this.concluido = concluido;
 	}
-	
-	
-	
 	
 
 }

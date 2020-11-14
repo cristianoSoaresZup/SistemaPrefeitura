@@ -40,14 +40,14 @@ public class FuncionarioController {
 	}
 
 	@DeleteMapping(path = "/{idFuncionario}", produces = { MediaType.APPLICATION_JSON_VALUE })
-	public boolean removeSecretaria(@PathVariable Long idFuncionario) {
+	public MensagemDto removeSecretaria(@PathVariable Long idFuncionario) {
 		return this.funcionarioService.removeFuncionario(idFuncionario);
 	}
 
 	@PutMapping(path = "/{idFuncionario}", produces = { MediaType.APPLICATION_JSON_VALUE })
 	public MensagemDto alteraFuncionario(@PathVariable Long idFuncionario, @RequestBody FuncionarioDto funcionario) {
 
-		return funcionarioService.alteraFuncionario(funcionario);
+		return funcionarioService.alteraFuncionario(idFuncionario, funcionario);
 	}
 
 }

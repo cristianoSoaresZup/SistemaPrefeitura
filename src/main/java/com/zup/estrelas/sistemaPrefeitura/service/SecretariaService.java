@@ -13,11 +13,12 @@ import com.zup.estrelas.sistemaPrefeitura.repository.SecretariaRepository;
 @Service
 public class SecretariaService {
 
-	private static final String SECRETARIA_JA_EXISTE_OU_CAMPO_AREA_NULO = "Cadastro não pode ser efetuado sem a área de atuação da secretaria, ou a secretaria já existe";
+	private static final String SECRETARIA_JA_EXISTE = "Secretaria dessa área já existe";
 	private static final String SECRETARIA_CADASTRADA_COM_SUCESSO = "Secretaria cadastrada com sucesso";
 	private static final String SECRETARIA_ALTERADA_COM_SUCESSO = "Secretaria alterada com sucesso";
 	private static final String SECRETARIA_REMOVIDA_COM_SUCESSO = "Secretaria removida com sucesso";
 	private static final String SECRETARIA_NAO_ENCONTRADA = "Secretaria não existe em nosso banco de dados";
+	private static final String CAMPO_AREA_NAO_PODE_SER_NULO = "É necessário informar a área de atuação da no va secretaria";
 
 	@Autowired
 	SecretariaRepository repository;
@@ -25,8 +26,11 @@ public class SecretariaService {
 	public MensagemDto insereSecretaria(SecretariaEntity secretaria) {
 		Optional<String> secretariaAreaOptional = Optional.ofNullable(secretaria.getArea());
 
-		if (secretariaAreaOptional.isEmpty() || repository.existsByArea(secretaria.getArea())) {
-			return new MensagemDto(SECRETARIA_JA_EXISTE_OU_CAMPO_AREA_NULO);
+		if (secretariaAreaOptional.isEmpty()) {
+			return new MensagemDto(CAMPO_AREA_NAO_PODE_SER_NULO);
+		}
+		if (repository.existsByArea(secretaria.getArea())) {
+			return new MensagemDto(SECRETARIA_JA_EXISTE);
 		}
 		this.repository.save(secretaria);
 		return new MensagemDto(SECRETARIA_CADASTRADA_COM_SUCESSO);
