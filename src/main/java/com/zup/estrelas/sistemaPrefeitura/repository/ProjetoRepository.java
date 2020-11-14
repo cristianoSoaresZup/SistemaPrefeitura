@@ -8,5 +8,4 @@ import com.zup.estrelas.sistemaPrefeitura.entity.ProjetoEntity;
 @Repository
 public interface ProjetoRepository extends CrudRepository<ProjetoEntity, Long> {
 
-	boolean existsbyNome (String nome);
 }
