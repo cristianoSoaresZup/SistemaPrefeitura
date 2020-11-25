@@ -20,6 +20,9 @@ import com.zup.estrelas.sistemaPrefeitura.service.FuncionarioService;
 
 @RestController
 @RequestMapping("/sistemaPrefeitura/funcionario")
+// FIXME: Cris, é uma boa prática nomear
+// os recursos no plural, o ideal aqui seria
+// /sistemaPrefeitura/funcionarios
 public class FuncionarioController {
 	@Autowired
 	FuncionarioService funcionarioService;

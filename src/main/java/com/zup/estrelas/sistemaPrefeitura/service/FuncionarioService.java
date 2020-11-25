@@ -29,6 +29,7 @@ public class FuncionarioService {
 
 	@Autowired
 	FuncionarioRepository funcionarioRepository;
+	//FIXME: Faltou um autowired aqui.
 	SecretariaRepository secretariaRepository;
 
 	public MensagemDto insereFuncionario(FuncionarioDto funcionarioDto) {
@@ -105,6 +106,10 @@ public class FuncionarioService {
 		Double salario = funcionario.getSalario();
 		Double novoSalario = funcionarioDto.getSalario();
 
+		//FIXME: Seria legal criar um método privado 
+		// (tipo uma função) com essa alteração de salário
+		// entre secretarias para deixar esse método aqui
+		// mais enxuto.
 		Optional<SecretariaEntity> secretariaOptional = secretariaRepository.findById(funcionario.getIdSecretraria());
 		SecretariaEntity secretaria = secretariaOptional.get();
 		Optional<SecretariaEntity> secretariaDestinoOptional = secretariaRepository.findById(funcionarioDto.getIdSecretaria());

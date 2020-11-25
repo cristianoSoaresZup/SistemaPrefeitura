@@ -18,6 +18,8 @@ public class Secretariatests {
 	@Mock
 	SecretariaRepository secretariaRepository;
 
+	// FIXME: Cris, nós só testamos no nível da camada de serviço
+	// por enquanto, por isso, o injectmocks deveria estar aqui.
 	@Mock
 	SecretariaService secretariaService;
 

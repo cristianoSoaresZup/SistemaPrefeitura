@@ -27,6 +27,7 @@ public class ProjetoService {
 
 	@Autowired
 	ProjetoRepository projetoRepository;
+	//FIXME: Faltou um @Autowired aqui.
 	SecretariaRepository secretariaRepository;
 
 	public MensagemDto insereProjeto(ProjetoDto projetoDto) {
@@ -53,6 +54,9 @@ public class ProjetoService {
 		projetoDto.setDataEntrega(null);
 		secretariaRepository.save(secretaria);
 		ProjetoEntity projeto = projetoDto.transformaParaObjeto();
+		//FIXME: Faltou aqui um projeto.setSecretaria(secretaria)
+		//pra indicar que aquela secretaria é daquele projeto.
+		projeto.setIdSecretaria(secretaria);
 		projetoRepository.save(projeto);
 
 		return new MensagemDto(PROJETO_CADASTRADO_COM_SUCESSO);
@@ -63,6 +67,10 @@ public class ProjetoService {
 	}
 
 	public ProjetoEntity buscaProjeto(Long idProjeto) {
+	    // FIXME: Aqui, Cris, não é necessário fazer essa validação,
+        // se você retornasse um Optional.ofNullable(repository.findById(idProjeto)
+        // ele retorna ou o projeto ou um optional empty, sem a necessidade do if
+        // pra direcionar esse fluxo, e nem do optional à cima (basta verificar id Nulo).
 		if (idProjeto.equals(null) || !projetoRepository.existsById(idProjeto)) {
 			return null;
 		}
@@ -86,6 +94,8 @@ public class ProjetoService {
 		ProjetoEntity projeto = projetoOptional.get();
 		Long idSecretaria = projeto.getIdProjeto();
 
+		//FIXME: O projeto, de acordo com a regra de negócio só 
+		// pode ter a descrição alterada.
 		Optional<SecretariaEntity> secretariaOptional = secretariaRepository.findById(idSecretaria);
 		SecretariaEntity secretaria = secretariaOptional.get();
 		Optional<SecretariaEntity> secretariaDestinoOptional = secretariaRepository.findById(projetoDto.getIdSecretaria());
