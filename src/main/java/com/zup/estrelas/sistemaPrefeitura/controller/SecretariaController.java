@@ -19,6 +19,9 @@ import com.zup.estrelas.sistemaPrefeitura.entity.SecretariaEntity;
 import com.zup.estrelas.sistemaPrefeitura.service.SecretariaService;
 
 @RestController
+// FIXME: Cris, é uma boa prática nomear
+// os recursos no plural, o ideal aqui seria
+// /sistemaPrefeitura/secretarias
 @RequestMapping("/sistemaPrefeitura/secretaria")
 public class SecretariaController {
 
@@ -26,6 +29,7 @@ public class SecretariaController {
 	SecretariaService secretariaService;
 
 	@PostMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
+	//FIXME: Faltou criar um DTO para ser a entrada de secretaria.
 	public MensagemDto criaSecretaria(@RequestBody SecretariaEntity secretaria) {
 		return this.secretariaService.insereSecretaria(secretaria);
 	}

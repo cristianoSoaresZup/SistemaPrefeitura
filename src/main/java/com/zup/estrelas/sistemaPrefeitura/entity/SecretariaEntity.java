@@ -18,6 +18,7 @@ public class SecretariaEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idSecretaria;
+	//FIXME: Seria legal usar um enum aqui.
 	private String area;
 	private Double orcamentoProjetos;
 	private Double orcamentoFolha;
@@ -30,6 +31,8 @@ public class SecretariaEntity {
 	@OneToMany(mappedBy="idFuncionario")
 	private List<FuncionarioEntity> funcionarios;
 	
+	//FIXME: Faltou usar a anotação 
+	// assim como usou pros funcionários.
 	@OneToMany(mappedBy="idProjeto")
 	private List<ProjetoEntity> projetos;
 

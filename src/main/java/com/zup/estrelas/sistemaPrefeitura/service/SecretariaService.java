@@ -42,6 +42,10 @@ public class SecretariaService {
 
 	public Optional<SecretariaEntity> buscaSecretaria(Long idSecretaria) {
 		Optional<Long> secretariaIdOptional = Optional.ofNullable(idSecretaria);
+		// FIXME: Aqui, Cris, não é necessário fazer essa validação,
+		// se você retornasse um Optional.ofNullable(repository.findById(idSecretaria)
+		// ele retorna ou a secretaria ou um optional empty, sem a necessidade do if
+		// pra direcionar esse fluxo, e nem do optional à cima (basta verificar id Nulo).
 		if (secretariaIdOptional.isPresent() && repository.existsById(idSecretaria)) {
 			Optional<SecretariaEntity> secretaria = Optional.ofNullable(repository.findById(idSecretaria).get());
 			return secretaria;
@@ -61,6 +65,9 @@ public class SecretariaService {
 
 	public MensagemDto alteraSecretaria(Long idSecretaria, SecretariaEntity secretaria) {
 		Optional<Long> secretariaIdOptional = Optional.ofNullable(idSecretaria);
+		
+		//FIXME: Cris, ao alterar uma secretaria devemos realizar pelo menos
+		// a mesma validação feita na criação à respeito da área
 		if (secretariaIdOptional.isPresent() && repository.existsById(idSecretaria)) {
 			this.repository.save(secretaria);
 			return new MensagemDto(SECRETARIA_ALTERADA_COM_SUCESSO);

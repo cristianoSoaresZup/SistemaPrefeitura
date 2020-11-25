@@ -16,9 +16,12 @@ import com.zup.estrelas.sistemaPrefeitura.dto.ProjetoDto;
 import com.zup.estrelas.sistemaPrefeitura.entity.ProjetoEntity;
 import com.zup.estrelas.sistemaPrefeitura.service.ProjetoService;
 
-
+//FIXME: Faltou indentar essa classe.
 	@RestController
 	@RequestMapping("/sistemaPrefeitura/projeto")
+	// FIXME: Cris, é uma boa prática nomear
+	// os recursos no plural, o ideal aqui seria
+	// /sistemaPrefeitura/projetos
 	public class ProjetoController {
 
 		@Autowired
@@ -44,5 +47,6 @@ import com.zup.estrelas.sistemaPrefeitura.service.ProjetoService;
 			return this.projetoService.alteraProjeto(idProjeto, projetoDto);
 		}
 
+		//FIXME: Faltou o endpoint para finalizar o projeto.
 	}
 
